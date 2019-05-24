@@ -14,6 +14,7 @@
 		0132B828228BF16000436D63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0132B826228BF16000436D63 /* Main.storyboard */; };
 		0132B82A228BF16100436D63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0132B829228BF16100436D63 /* Assets.xcassets */; };
 		0132B82D228BF16100436D63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0132B82B228BF16100436D63 /* LaunchScreen.storyboard */; };
+		047EE9BB229812BE009362B3 /* HttpTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EE9BA229812BE009362B3 /* HttpTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		0132B829228BF16100436D63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0132B82C228BF16100436D63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0132B82E228BF16100436D63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		047EE9BA229812BE009362B3 /* HttpTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HttpTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				010675192296720E004C2101 /* ToViewController.swift */,
 				0132B824228BF16000436D63 /* ViewController.swift */,
 				01011691228BFE910052353E /* testc.c */,
+				047EE9BA229812BE009362B3 /* HttpTest.m */,
 				01011692228BFE910052353E /* testc.h */,
 				0132B826228BF16000436D63 /* Main.storyboard */,
 				0132B829228BF16100436D63 /* Assets.xcassets */,
@@ -114,7 +117,7 @@
 				TargetAttributes = {
 					0132B81E228BF16000436D63 = {
 						CreatedOnToolsVersion = 10.0;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -158,6 +161,7 @@
 				0132B825228BF16000436D63 /* ViewController.swift in Sources */,
 				0132B823228BF16000436D63 /* AppDelegate.swift in Sources */,
 				0106751A2296720E004C2101 /* ToViewController.swift in Sources */,
+				047EE9BB229812BE009362B3 /* HttpTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,7 +320,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "测试app/测试app-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -337,7 +341,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xl.iostest.--app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "测试app/测试app-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
