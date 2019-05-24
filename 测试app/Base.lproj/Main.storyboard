@@ -21,22 +21,25 @@
                                 <rect key="frame" x="167" y="308" width="40" height="122"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QmE-g1-Ucu">
+                                    <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QmE-g1-Ucu">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
                                         <state key="normal" title="按钮1"/>
                                         <connections>
-                                            <action selector="btn_dowm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GZq-c7-tgP"/>
+                                            <action selector="btnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WcI-G3-mEF"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSH-cS-EPp">
+                                    <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSH-cS-EPp">
                                         <rect key="frame" x="0.0" y="46" width="40" height="30"/>
                                         <state key="normal" title="按钮2"/>
+                                        <connections>
+                                            <action selector="btnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CYP-p0-bLC"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CnZ-Sy-cLg">
+                                    <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CnZ-Sy-cLg">
                                         <rect key="frame" x="0.0" y="92" width="40" height="30"/>
                                         <state key="normal" title="按钮3"/>
                                         <connections>
-                                            <action selector="btn_dowm:" destination="BYZ-38-t0r" eventType="touchDown" id="8nR-0x-oE6"/>
+                                            <action selector="btnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LoR-YW-MgW"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -69,10 +72,30 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="textView1" destination="6tx-Yl-NfU" id="xv5-8h-rLt"/>
+                        <outlet property="textView2" destination="iuq-Mz-cBp" id="YLe-QE-DUH"/>
+                        <outlet property="textView3" destination="KK3-4k-UTK" id="Sa5-a9-Des"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="133.59999999999999" y="133.5832083958021"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="eXC-bR-qB4">
+            <objects>
+                <viewController id="NvF-fb-t0k" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jdu-yj-FD0" customClass="ToViewController">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="b7M-s5-lPm"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hjh-Vb-hq6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="850" y="130"/>
         </scene>
     </scenes>
 </document>
