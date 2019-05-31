@@ -7,6 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HttpTest.h"
+
+
+
+
+
 
 @implementation HttpTest : NSObject
 
@@ -53,10 +59,10 @@
 }
 
 //发送GET请求的第一种方法
--(void)get2
+-(void)get:(NSString*)urlstring
 {
     //1.确定请求路径
-    NSURL *url = [NSURL URLWithString:@"http://120.25.226.186:32812/login?username=520it&pwd=520it&type=JSON"];
+    NSURL *url = [NSURL URLWithString:urlstring];
     
     //2.获得会话对象
     NSURLSession *session = [NSURLSession sharedSession];
@@ -74,6 +80,7 @@
      */
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
+        NSLog(@"获取数据成功%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         //5.解析数据
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         NSLog(@"%@",dict);
@@ -89,7 +96,98 @@
 //执行结果
 //![](http://images2015.cnblogs.com/blog/450136/201601/450136-20160129131707286-1497362695.png)
 
+-(void)postUrl:(NSString*)urltext withParam: (NSString*)param andSetListener: (void(^)(NSString*)) callback {
+    //对请求路径的说明
+    //http://120.25.226.186:32812/login
+    //协议头+主机地址+接口名称
+    //协议头(http://)+主机地址(120.25.226.186:32812)+接口名称(login)
+    //POST请求需要修改请求方法为POST，并把参数转换为二进制数据设置为请求体
+    
+    //1.创建会话对象
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    //2.根据会话对象创建task
+    NSURL *url = [NSURL URLWithString:urltext];
+    
+    //3.创建可变的请求对象
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    //4.修改请求方法为POST
+    request.HTTPMethod = @"POST";
+    
+    //5.设置请求体
+    request.HTTPBody = [param dataUsingEncoding:NSUTF8StringEncoding];
+    
+    //6.根据会话对象创建一个Task(发送请求）
+    /*
+     第一个参数：请求对象
+     第二个参数：completionHandler回调（请求完成【成功|失败】的回调）
+     data：响应体信息（期望的数据）
+     response：响应头信息，主要是对服务器端的描述
+     error：错误信息，如果请求失败，则error有值
+     */
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        //8.解析数据
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        //NSLog(@"%@",dict);
+        //将data转string
+        NSString* text = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"post请求成功：%@",text);
+        if(callback){
+            callback(text);
+        }
+    }];
+    
+    //7.执行任务
+    [dataTask resume];
+}
 
+-(void)post:(NSString*)urltext :(NSString*)param
+{
+    //对请求路径的说明
+    //http://120.25.226.186:32812/login
+    //协议头+主机地址+接口名称
+    //协议头(http://)+主机地址(120.25.226.186:32812)+接口名称(login)
+    //POST请求需要修改请求方法为POST，并把参数转换为二进制数据设置为请求体
+    
+    //1.创建会话对象
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    //2.根据会话对象创建task
+    NSURL *url = [NSURL URLWithString:urltext];
+    
+    //3.创建可变的请求对象
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    //4.修改请求方法为POST
+    request.HTTPMethod = @"POST";
+    
+    //5.设置请求体
+    request.HTTPBody = [param dataUsingEncoding:NSUTF8StringEncoding];
+    
+    //6.根据会话对象创建一个Task(发送请求）
+    /*
+     第一个参数：请求对象
+     第二个参数：completionHandler回调（请求完成【成功|失败】的回调）
+     data：响应体信息（期望的数据）
+     response：响应头信息，主要是对服务器端的描述
+     error：错误信息，如果请求失败，则error有值
+     */
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        //8.解析数据
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        NSLog(@"%@",dict);
+        //将data转string
+        NSString* text = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"post请求成功：%@",text);
+        
+    }];
+    
+    //7.执行任务
+    [dataTask resume];
+}
 
 @end
 

@@ -14,6 +14,7 @@
 		0132B828228BF16000436D63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0132B826228BF16000436D63 /* Main.storyboard */; };
 		0132B82A228BF16100436D63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0132B829228BF16100436D63 /* Assets.xcassets */; };
 		0132B82D228BF16100436D63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0132B82B228BF16100436D63 /* LaunchScreen.storyboard */; };
+		0416614522A17AE900AF374A /* ExternString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416614422A17AE900AF374A /* ExternString.swift */; };
 		047EE9BB229812BE009362B3 /* HttpTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EE9BA229812BE009362B3 /* HttpTest.m */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +30,9 @@
 		0132B829228BF16100436D63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0132B82C228BF16100436D63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0132B82E228BF16100436D63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0416614422A17AE900AF374A /* ExternString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternString.swift; sourceTree = "<group>"; };
 		047EE9BA229812BE009362B3 /* HttpTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HttpTest.m; sourceTree = "<group>"; };
+		04AC8FAD229C0A4B00BE5DF6 /* HttpTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HttpTest.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,13 +46,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0101168F228BFE640052353E /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		0132B816228BF15F00436D63 = {
 			isa = PBXGroup;
 			children = (
@@ -69,7 +65,6 @@
 		0132B821228BF16000436D63 /* 测试app */ = {
 			isa = PBXGroup;
 			children = (
-				0101168F228BFE640052353E /* New Group */,
 				0132B822228BF16000436D63 /* AppDelegate.swift */,
 				010675192296720E004C2101 /* ToViewController.swift */,
 				0132B824228BF16000436D63 /* ViewController.swift */,
@@ -81,6 +76,8 @@
 				0132B82B228BF16100436D63 /* LaunchScreen.storyboard */,
 				0132B82E228BF16100436D63 /* Info.plist */,
 				01011690228BFE910052353E /* 测试app-Bridging-Header.h */,
+				04AC8FAD229C0A4B00BE5DF6 /* HttpTest.h */,
+				0416614422A17AE900AF374A /* ExternString.swift */,
 			);
 			path = "测试app";
 			sourceTree = "<group>";
@@ -159,6 +156,7 @@
 			files = (
 				01011693228BFE910052353E /* testc.c in Sources */,
 				0132B825228BF16000436D63 /* ViewController.swift in Sources */,
+				0416614522A17AE900AF374A /* ExternString.swift in Sources */,
 				0132B823228BF16000436D63 /* AppDelegate.swift in Sources */,
 				0106751A2296720E004C2101 /* ToViewController.swift in Sources */,
 				047EE9BB229812BE009362B3 /* HttpTest.m in Sources */,

@@ -8,11 +8,16 @@
 
 import UIKit
 
+
+
 class ViewController: UIViewController {
     var check_num:Int?;
     @IBOutlet weak var textView1: UITextField!
     @IBOutlet weak var textView2: UITextField!
     @IBOutlet weak var textView3: UITextField!
+    
+ 
+    
     @IBAction func btn_dowm(_ sender: UIButton) {
         sender.setTitle("按钮点击：\(check_num!)", for: UIControl.State.normal)
         check_num!+=1;
@@ -21,6 +26,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         check_num = 0
+        print("ViewDidLoad")
+        print("View".md5())
+        let gettest = HttpTest()
+        fanyi("test")
+        //gettest.post("https://yzjlb.net/", "param");
+//        var lis = listener();
+        /*gettest.postUrl("https://yzjlb.net/", withParam: "param"){(str) in
+            NSLog("获取成功 --> %@",str!)
+        };*/
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -68,7 +82,7 @@ class ViewController: UIViewController {
                 }
             }
         }
-        
+     
     }
     
     
@@ -112,5 +126,39 @@ class ViewController: UIViewController {
     }
     
     */
+    
+    //有道翻译
+    func fanyi(_ text:String) -> Void {
+        let now = NSDate();
+        let ii = arc4random()%10 + 1;
+        let time = now.timeIntervalSince1970
+        let ua = "Dalvik/1.6.0 (Linux;Android 4.4.4; MI 4LTE MIUI/V6.2.0.KXDCNCF";
+        let textcode:String = text;
+        let d = "@6f#X3=cCuncYssPsuRUE";
+        var param = "i=" + textcode
+            param += "&from=AUTO"
+                param +=  "&smartresult=dict"
+                    param +=  "&client=fanyideskweb"
+                    param +=  "&salt=\(time)\(ii)"
+                    param +=  "&sign="
+                    param +=  ("fanyideskweb\(text)\(time)\(ii)\(d)").md5()
+                    param +=  ("&ts=\(time)")
+                    param +=  ("&bv=" + ua.md5())
+                    param +=  "&doctype=json"
+                    param +=  "&version=2.1"
+                    param +=  "&keyfrom=fanyi.web"
+                    param +=  "&action=FY_BY_CLICKBUTTION"
+                    param +=  "&typoResult=false"
+        let url = "http://fanyi.youdao.com/translate_o?smartresult=dict&smartresult=rule";
+        print("参数：\(param)")
+        let post = HttpTest();
+        post.postUrl(url, withParam: param) {(str) in
+            print("\(str!)")
+            };
+        
+        
+//        var ii = arc4random()%10 + 1;
+        
+    }
 }
 
