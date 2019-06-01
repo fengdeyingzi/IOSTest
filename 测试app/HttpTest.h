@@ -23,6 +23,7 @@
 -(void)get:(NSString*)urlstring;
 -(void)post:(NSString*)urlstring withPar:(NSString*)param;
 -(void)postUrl:(NSString*)urltext withParam: (NSString*)param andSetListener: (void(^)(NSString*)) listener ;
+-(void)postFanyi:(NSString*)urltext withParam: (NSString*)param andSetListener: (void(^)(NSString*)) callback;
 @end
 
 

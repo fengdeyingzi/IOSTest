@@ -16,7 +16,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var textView2: UITextField!
     @IBOutlet weak var textView3: UITextField!
     
- 
+    @IBOutlet weak var text_input: UITextField!
+    @IBOutlet weak var text_output: UITextView!
+    
+    //点击按钮翻译
+    @IBAction func btn_fanyi(_ sender: UIButton) {
+        //获取输入文本
+        let text = text_input.text;
+        fanyi(text!)
+    }
+    
     
     @IBAction func btn_dowm(_ sender: UIButton) {
         sender.setTitle("按钮点击：\(check_num!)", for: UIControl.State.normal)
@@ -29,7 +38,7 @@ class ViewController: UIViewController {
         print("ViewDidLoad")
         print("View".md5())
         let gettest = HttpTest()
-        fanyi("test")
+//        fanyi("test")
         //gettest.post("https://yzjlb.net/", "param");
 //        var lis = listener();
         /*gettest.postUrl("https://yzjlb.net/", withParam: "param"){(str) in
@@ -131,34 +140,66 @@ class ViewController: UIViewController {
     func fanyi(_ text:String) -> Void {
         let now = NSDate();
         let ii = arc4random()%10 + 1;
-        let time = now.timeIntervalSince1970
+        let time = (Int)(now.timeIntervalSince1970 * 1000)
+        print("时间\(time)")
         let ua = "Dalvik/1.6.0 (Linux;Android 4.4.4; MI 4LTE MIUI/V6.2.0.KXDCNCF";
         let textcode:String = text;
         let d = "@6f#X3=cCuncYssPsuRUE";
         var param = "i=" + textcode
             param += "&from=AUTO"
-                param +=  "&smartresult=dict"
-                    param +=  "&client=fanyideskweb"
-                    param +=  "&salt=\(time)\(ii)"
-                    param +=  "&sign="
-                    param +=  ("fanyideskweb\(text)\(time)\(ii)\(d)").md5()
-                    param +=  ("&ts=\(time)")
-                    param +=  ("&bv=" + ua.md5())
-                    param +=  "&doctype=json"
-                    param +=  "&version=2.1"
-                    param +=  "&keyfrom=fanyi.web"
-                    param +=  "&action=FY_BY_CLICKBUTTION"
-                    param +=  "&typoResult=false"
+            param +=  "&smartresult=dict"
+            param +=  "&client=fanyideskweb"
+            param +=  "&salt=\(time)\(ii)"
+            param +=  "&sign="
+            param +=  ("fanyideskweb\(text)\(time)\(ii)\(d)").md5()
+            param +=  ("&ts=\(time)")
+            param +=  ("&bv=" + ua.md5())
+            param +=  "&doctype=json"
+            param +=  "&version=2.1"
+            param +=  "&keyfrom=fanyi.web"
+            param +=  "&action=FY_BY_CLICKBUTTION"
+            param +=  "&typoResult=false"
         let url = "http://fanyi.youdao.com/translate_o?smartresult=dict&smartresult=rule";
         print("参数：\(param)")
         let post = HttpTest();
-        post.postUrl(url, withParam: param) {(str) in
+        post.postFanyi(url, withParam: param) {(str) in
             print("\(str!)")
+           /*
+            OperationQueue .main.addOperation(black: {
+                text_output.text = str!
+                })
             };
+        */
+        DispatchQueue.main.sync {
+            self.text_output.text = str!
+            self.text_output.text = "";
+            let data = str!.data(using: String.Encoding.utf8)
+            
+          //  let jsonData = JSONSerialization.JSONObjectWithData(Data, options: JSONSerialization.ReadingOptions.MutableContainers, error: nil) as NSDictionary
+            let json = try?JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+          //  var str="result:\n"+String(ExternString!)
+            let array1:NSArray = json?.object(forKey: "translateResult") as! NSArray
+            for i in 0..<array1.count{
+                let array2 = array1.object(at: i) as! NSArray
+                for ii in 0..<array2.count{
+                    let obj = array2.object(at: ii) as! NSDictionary
+                    let tgt = obj.object(forKey: "tgt") as! String
+                    let src = obj.object(forKey: "src") as! String
+                    print("tgt=\(tgt) src= \(src)")
+                    self.text_output.text.append(tgt+"\n")
+                }
+            }
+          
+            
+            for (key,value) in json ?? ["":""]{
+                print("\n key-->\(key)"+" value=\(value) ")
+                
+            }
+        }
         
         
 //        var ii = arc4random()%10 + 1;
         
     }
 }
-
+}

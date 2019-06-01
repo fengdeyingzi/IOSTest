@@ -143,6 +143,59 @@
     [dataTask resume];
 }
 
+
+
+-(void)postFanyi:(NSString*)urltext withParam: (NSString*)param andSetListener: (void(^)(NSString*)) callback {
+    //对请求路径的说明
+    //http://120.25.226.186:32812/login
+    //协议头+主机地址+接口名称
+    //协议头(http://)+主机地址(120.25.226.186:32812)+接口名称(login)
+    //POST请求需要修改请求方法为POST，并把参数转换为二进制数据设置为请求体
+    
+    //1.创建会话对象
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    //2.根据会话对象创建task
+    NSURL *url = [NSURL URLWithString:urltext];
+    
+    //3.创建可变的请求对象
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    //设置请求头
+    [request addValue:@"Dalvik/1.6.0 (Linux; U; Android 4.4.4;MI 4LTE MIUI/V6.6.2.0.KXDCNCF)" forHTTPHeaderField:@"user-agent"];
+    [request addValue:@"http://fanyi.youdao.com" forHTTPHeaderField:@"Referer"];
+    [request addValue:@"OUTFOX_SEARCH_USER_ID_NCOO=1537643834.9570553; OUTFOX_SEARCH_USER_ID=1799185238@10.169.0.83; fanyi-ad-id=43155; fanyi-ad-closed=1; JSESSIONID=aaaBwRanNsqoobhgvaHmw; _ntes_nnid=07e771bc10603d984c2dc8045a293d30,1525267244050; ___r1__test__cookies=\(time)" forHTTPHeaderField:@"Cookie"];
+    
+    //4.修改请求方法为POST
+    request.HTTPMethod = @"POST";
+    
+    //5.设置请求体
+    request.HTTPBody = [param dataUsingEncoding:NSUTF8StringEncoding];
+    
+    //6.根据会话对象创建一个Task(发送请求）
+    /*
+     第一个参数：请求对象
+     第二个参数：completionHandler回调（请求完成【成功|失败】的回调）
+     data：响应体信息（期望的数据）
+     response：响应头信息，主要是对服务器端的描述
+     error：错误信息，如果请求失败，则error有值
+     */
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        //8.解析数据
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        //NSLog(@"%@",dict);
+        //将data转string
+        NSString* text = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"post请求成功：%@",text);
+        if(callback){
+            callback(text);
+        }
+    }];
+    
+    //7.执行任务
+    [dataTask resume];
+}
+
 -(void)post:(NSString*)urltext :(NSString*)param
 {
     //对请求路径的说明
@@ -159,7 +212,7 @@
     
     //3.创建可变的请求对象
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    
+    [request addValue:@"text/json" forHTTPHeaderField:@"type"];
     //4.修改请求方法为POST
     request.HTTPMethod = @"POST";
     
