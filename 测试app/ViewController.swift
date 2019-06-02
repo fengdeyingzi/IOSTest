@@ -37,7 +37,8 @@ class ViewController: UIViewController {
         check_num = 0
         print("ViewDidLoad")
         print("View".md5())
-        let gettest = HttpTest()
+        print("%@",Bundle.main.path(forAuxiliaryExecutable: "")!)
+          let gettest = HttpTest()
 //        fanyi("test")
         //gettest.post("https://yzjlb.net/", "param");
 //        var lis = listener();
@@ -46,6 +47,7 @@ class ViewController: UIViewController {
         };*/
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
 
     @IBAction func btnClick(_ sender: UIButton) {
         NSLog("btn tag is %d", sender.tag)
