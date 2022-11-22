@@ -1,0 +1,48 @@
+name: buildIOS
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+    branches: [master]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    # - uses: actions/setup-java@v2
+    #   with:
+    #     distribution: 'zulu'
+    #     java-version: '11'
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '3.3.0'
+    - run: flutter pub get
+#    - run: flutter test
+#    - run: flutter build apk --split-per-abi
+    - run: flutter build ios --release --no-codesign
+    # - run: flutter config --enable-macos-desktop
+    # - run: flutter build macos
+    # - uses: actions/upload-artifact@v1
+    #   with:
+    #     name: face_plus
+    #     path: build/
+    - uses: yukiarrr/ios-build-action@v1.5.0
+      with:
+        project-path: ios/Runner.xcodeproj
+        # p12-key-base64: ${{ secrets.P12_KEY_BASE64 }} #
+        # p12-cer-base64: ${{ secrets.P12_CER_BASE64 }} #
+        p12-base64: ${{ secrets.P12_BASE64 }} #
+        mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }} #
+        code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }} #
+        export-method: development
+        certificate-password: ${{ secrets.CERTIFICATE_PASSWORD }}
+        team-id: ${{ secrets.TEAM_ID }}
+        output-path: build/Runner.ipa
+        # pods-path: ios/Podfile
+        workspace-path: ios/Runner.xcworkspace
+    - run: ls build
+    - run: ls build/ios
+    - run: pwd
+    - run: curl -F "file=@/Users/runner/work/iostest/iostest/build/Runner.ipa" -F "uKey=1eaa696d4cbe2de248dce47d99122a4a" -F "_api_key=bdbff33f8c14fda69deb620d48895516" https://upload.pgyer.com/apiv1/app/upload
